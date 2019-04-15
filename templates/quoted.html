@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote prices
+{% endblock %}
+
+{% block main %}
+<table id="quotes">
+    <tr>
+        <th>Company</th>
+        <th>Symbol</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>
+            {{ quote["name"] }}
+        </td>
+        <td>
+            {{ quote["symbol"] }}
+        </td>
+        <td>
+            {{ '{:.2f}'.format(quote["price"]) }}
+        </td>
+    </tr>
+</table>
+{% endblock %}

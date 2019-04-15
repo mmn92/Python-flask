@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction history
+{% endblock %}
+
+{% block main %}
+{% if stocks != 0 %}
+    <table id="quotes">
+        <tr>
+            <th>Company</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Day</th>
+        </tr>
+        {% for info in db_info %}
+            <tr>
+                <td>{{info["company"]}}</td>
+                <td>{{info["symbol"]}}</td>
+                <td>{{info["type"]}}</td>
+                <td>{{info["shares"]}}</td>
+                <td>{{'{:.2f}'.format(info["price"])}}</td>
+                <td>{{info["day"]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}

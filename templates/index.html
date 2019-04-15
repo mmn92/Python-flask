@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks owned
+{% endblock %}
+
+{% block main %}
+<h1>Stocks owned</h1><br/>
+{% if stocks != 0 %}
+    <table id="quotes">
+        <tr>
+            <th>Stocks</th>
+            <th>Shares</th>
+            <th>Prices</th>
+            <th>Holding</th>
+            <th>Buy</th>
+            <th>Sell</th>
+        </tr>
+        {% for info in db_info %}
+            <tr>
+                <td>{{info.symbol}}</td>
+                <td>{{info.shares}}</td>
+                <td>{{prices[info["company"]]}}</td>
+                <td>{{'{:.2f}'.format(prices[info["company"]] * info["shares"]) }}</td>
+                <td>
+                    <form action="/buy" method="post">
+                        <input name="symbol" type="hidden" value="{{info.symbol}}" />
+                        <input name="shares" type="hidden" value="1"/>
+                        <button class="button" type="submit">1 share</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/sell" method="post">
+                        <input name="symbol" type="hidden" value="{{info.symbol}}" />
+                        <input name="shares" type="hidden" value="1"/>
+                        <button class="button" type="submit">1 share</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+<br/><br/>
+<table id="quotes">
+    <tr>
+        <th>Balance</th>
+        <th>Shares</th>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>{{ '{:.2f}'.format(user_balance)}}</td>
+        <td>{{ '{:.2f}'.format(stocks)}}</td>
+        <td>{{ '{:.2f}'.format(user_balance + stocks)}}</td>
+    </tr>
+</table>
+{% endblock %}
