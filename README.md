@@ -1,3 +1,3 @@
-# gitTestProject
+# Python Application
 
-Just testing some stuff
+This is a Python web application, made using flask and jinja2
